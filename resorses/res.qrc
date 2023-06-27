@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>kalayab-logo.png</file>
+    <file>carandbike.png</file>
+    <file>cloth.png</file>
+    <file>cooking.png</file>
+    <file>digital.png</file>
+    <file>laptop.png</file>
+    <file>mobile.png</file>
+  </qresource>
+</RCC>
