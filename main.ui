@@ -243,8 +243,53 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="login_button">
+    <property name="geometry">
+     <rect>
+      <x>709</x>
+      <y>20</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>ورود و ثبت نام</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>890</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGuest">
+    <property name="title">
+     <string>Guest</string>
+    </property>
+    <addaction name="action_2"/>
+   </widget>
+   <addaction name="menuGuest"/>
+  </widget>
+  <action name="action">
+   <property name="text">
+    <string>ورود به حساب</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>خروج از حساب کاربری</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="resorses/res.qrc"/>

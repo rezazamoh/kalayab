@@ -31,7 +31,7 @@ def scan(searched):
          
             
         except:
-            price = 'NETWORK ERROR'
+            price = 'توافقی'
 
         try:
             #get link
