@@ -20,7 +20,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="user_input">
     <property name="geometry">
      <rect>
       <x>340</x>
@@ -30,7 +30,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="pass_input">
     <property name="geometry">
      <rect>
       <x>340</x>
@@ -52,7 +52,7 @@
     <property name="title">
      <string/>
     </property>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="register_rb">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -70,7 +70,7 @@
       <string>ثبت نام</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="login_rb">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -89,7 +89,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="done_button">
     <property name="geometry">
      <rect>
       <x>340</x>
@@ -102,7 +102,7 @@
      <string>اعمال</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label1">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -115,7 +115,7 @@
      <string>نام کاربری:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label2">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -126,6 +126,19 @@
     </property>
     <property name="text">
      <string>رمز ورود:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="error_label">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>220</y>
+      <width>241</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

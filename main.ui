@@ -272,20 +272,20 @@
      <height>20</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuGuest">
+   <widget class="QMenu" name="account_menu">
     <property name="title">
      <string>Guest</string>
     </property>
-    <addaction name="action_2"/>
+    <addaction name="logout"/>
    </widget>
-   <addaction name="menuGuest"/>
+   <addaction name="account_menu"/>
   </widget>
   <action name="action">
    <property name="text">
     <string>ورود به حساب</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="logout">
    <property name="text">
     <string>خروج از حساب کاربری</string>
    </property>
