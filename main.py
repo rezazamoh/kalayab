@@ -5,10 +5,10 @@ import login
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication , QListWidgetItem ,QMenu
+from PyQt5.QtWidgets import QMainWindow, QApplication , QListWidgetItem
 searched_phrase = ''
 result_list = []
-account = 'حساب کاربری'
+account = 'Guest'
 
 class main_screen(QMainWindow):
     def __init__(self):
@@ -21,6 +21,7 @@ class main_screen(QMainWindow):
         self.cooking_label.mousePressEvent = self.goto_cook
         self.clothing_label.mousePressEvent = self.goto_cloth
         self.digital_label.mousePressEvent = self.goto_digi
+        self.loved_label.mousePressEvent = self.goto_loved
         self.logout.triggered.connect(self.logout_func)
 
     def search_func(self):
@@ -43,8 +44,8 @@ class main_screen(QMainWindow):
 
     def logout_func(self):
         global account
-        if account != 'حساب کابری':
-            account = 'حساب کابری'
+        if account != 'Guest':
+            account = 'Guest'
             self.account_menu.setTitle(account)
             self.logged_out = QtWidgets.QErrorMessage()
             self.logged_out.showMessage('از حساب خود با موفقیت خارج شدید')
@@ -52,6 +53,11 @@ class main_screen(QMainWindow):
             self.notlogged = QtWidgets.QErrorMessage()
             self.notlogged.showMessage('داخل حسابی نیستید که بخواهید از آن خارج شوید!')
 
+    def goto_loved(self,event):
+        global account
+        if account == 'Guest':
+            self.notlogged = QtWidgets.QErrorMessage()
+            self.notlogged.showMessage('داخل حسابی نیستید که بخواهید علاقه مندی هایتان را ببینید!')
     
     def goto_lap(self,event):
             global result_list
@@ -94,8 +100,14 @@ class login_screen(QMainWindow):
         loadUi("login.ui",self)
         self.register_rb.setChecked(True)
         self.done_button.clicked.connect(self.log_reg)
+        self.back_button.clicked.connect(self.back_to_main)
+
+    def back_to_main(self):
+        widget.setCurrentIndex(widget.currentIndex()-1)
+        widget.removeWidget(self)
 
     def log_reg(self):
+        
         if self.register_rb.isChecked():
             respond = login.register(self.user_input.text(),self.pass_input.text())
         if self.login_rb.isChecked():

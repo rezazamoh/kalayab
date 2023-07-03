@@ -196,7 +196,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="candb_label">
+   <widget class="QLabel" name="loved_label">
     <property name="geometry">
      <rect>
       <x>590</x>
@@ -209,13 +209,13 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/newPrefix/carandbike.png);</string>
+     <string notr="true">background-image: url(:/newPrefix/loved.png);</string>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resorses/res.qrc">:/newPrefix/carandbike.png</pixmap>
+     <pixmap resource="resorses/res.qrc">:/newPrefix/loved.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

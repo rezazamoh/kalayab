@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>loved.png</file>
     <file>kalayab-logo.png</file>
     <file>carandbike.png</file>
     <file>cloth.png</file>
