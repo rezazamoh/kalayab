@@ -91,71 +91,26 @@
    <widget class="QTableWidget" name="details_table">
     <property name="geometry">
      <rect>
-      <x>570</x>
+      <x>550</x>
       <y>150</y>
-      <width>321</width>
-      <height>371</height>
+      <width>331</width>
+      <height>451</height>
      </rect>
     </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>258</number>
+     <number>165</number>
     </attribute>
     <attribute name="verticalHeaderDefaultSectionSize">
      <number>34</number>
     </attribute>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>New Row</string>
-     </property>
-    </row>
     <column>
      <property name="text">
       <string>مشخصات</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string/>
      </property>
     </column>
    </widget>
@@ -163,7 +118,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>270</y>
+      <y>280</y>
       <width>321</width>
       <height>121</height>
      </rect>
@@ -195,20 +150,10 @@
      </property>
     </column>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>321</width>
-      <height>251</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="love_button">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>350</x>
       <y>190</y>
       <width>181</width>
       <height>31</height>
@@ -221,7 +166,7 @@
    <widget class="QPushButton" name="back_to_results">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>350</x>
       <y>250</y>
       <width>181</width>
       <height>31</height>
@@ -231,17 +176,17 @@
      <string>بازگشت به منوی جستجو</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="back_to_main">
+   <widget class="QLabel" name="image_label">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>310</y>
-      <width>181</width>
-      <height>31</height>
+      <x>10</x>
+      <y>10</y>
+      <width>321</width>
+      <height>251</height>
      </rect>
     </property>
     <property name="text">
-     <string>بازگشت به منوی اصلی</string>
+     <string/>
     </property>
    </widget>
   </widget>

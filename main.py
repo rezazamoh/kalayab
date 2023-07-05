@@ -3,11 +3,11 @@ import resorses.res
 import digikala
 import login
 from PyQt5.uic import loadUi
-from PyQt5.QtCore import QThread
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication , QListWidgetItem
+from PyQt5.QtWidgets import QMainWindow, QApplication , QListWidgetItem ,QTableWidgetItem ,QTableWidget
 searched_phrase = ''
 result_list = []
+selected_item = 'None'
 account = 'Guest'
 
 class main_screen(QMainWindow):
@@ -131,7 +131,18 @@ class result_screen(QMainWindow):
         self.search_input.setText(searched_phrase)
         self.search_button.clicked.connect(self.search_func)
         self.back_button.clicked.connect(self.back_func)
+        self.select_button.clicked.connect(self.goto_goodpage)
 
+    def goto_goodpage(self):
+        global selected_item ; global result_list
+        selected = self.listWidget.currentRow()
+        if selected != -1:
+            selected_item = (list(result_list.keys())[selected])
+            good_window = good_screen()
+            widget.addWidget(good_window)
+            widget.setCurrentIndex(widget.currentIndex()+1)
+                    
+    
     def back_func(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
         widget.removeWidget(self)
@@ -140,10 +151,32 @@ class result_screen(QMainWindow):
         if len(self.search_input.text())>3:
             global searched_phrase
             searched_phrase = self.search_input.text()
-            print(searched_phrase)
         else: 
             self.error_dialog = QtWidgets.QErrorMessage()
             self.error_dialog.showMessage('لطفا حداقل ۴ حرف وارد کنید!')
+
+class good_screen(QMainWindow):
+    def __init__(self):
+        super(good_screen,self).__init__()
+        loadUi("kala.ui",self)
+        global selected_item ; global result_list
+        info = digikala.itemscanner(result_list[selected_item][1])
+        self.name_label.setText(selected_item)
+        self.back_to_results.clicked.connect(self.back_button1)
+        #loading image
+        self.image_label.setStyleSheet("background-image : url(good.png);border : 2px solid blue")
+        
+        #loadind info table 
+        for i in info:
+            rowPosition = self.details_table.rowCount()
+            if type(self.details_table) == QTableWidget:
+                self.details_table.insertRow(rowPosition)
+            self.details_table.setItem(rowPosition , 0, QTableWidgetItem(i.text))
+            self.details_table.setItem(rowPosition , 1, QTableWidgetItem(info[i].text))
+            
+    def back_button1(self):
+        widget.setCurrentIndex(widget.currentIndex()-1)
+        widget.removeWidget(self)         
 
 app=QApplication(sys.argv)
 widget = QtWidgets.QStackedWidget()
