@@ -18,13 +18,13 @@ class main_screen(QMainWindow):
         loadUi("main.ui",self)
         self.search_button.clicked.connect(self.search_func)
         self.login_button.clicked.connect(self.login_func)
+        self.logout.triggered.connect(self.logout_func)
         self.laptop_label.mousePressEvent = self.goto_lap
         self.mobile_label.mousePressEvent = self.goto_mob
         self.cooking_label.mousePressEvent = self.goto_cook
         self.clothing_label.mousePressEvent = self.goto_cloth
         self.digital_label.mousePressEvent = self.goto_digi
         self.loved_label.mousePressEvent = self.goto_loved
-        self.logout.triggered.connect(self.logout_func)
 
     def search_func(self):
         if len(self.search_input.text())>3:
@@ -60,6 +60,10 @@ class main_screen(QMainWindow):
         if account == 'Guest':
             self.notlogged = QtWidgets.QErrorMessage()
             self.notlogged.showMessage('داخل حسابی نیستید که بخواهید علاقه مندی هایتان را ببینید!')
+        else:
+            loved_window = loved_screen()
+            widget.addWidget(loved_window)
+            widget.setCurrentIndex(widget.currentIndex()+1)     
     
     def goto_lap(self,event):
             global result_list
@@ -125,11 +129,17 @@ class login_screen(QMainWindow):
 
 class loved_screen(QMainWindow):
     def __init__(self):
-        super(login_screen,self).__init__()
-        loadUi("login.ui",self)
-        self.register_rb.setChecked(True)
-        self.done_button.clicked.connect(self.log_reg)
-        self.back_button.clicked.connect(self.back_to_main)
+        super(loved_screen,self).__init__()
+        loadUi("loved.ui",self)
+        self.back_button.clicked.connect(self.back_func)
+        loved = []
+        for l in loved:
+            item = QListWidgetItem(l)
+            self.loved_list.addItem(item)
+
+    def back_func(self):
+        widget.setCurrentIndex(widget.currentIndex()-1)
+        widget.removeWidget(self)
 
 class result_screen(QMainWindow):
     def __init__(self):
@@ -186,6 +196,8 @@ class good_screen(QMainWindow):
         self.name_label.setText(selected_item)
         self.back_to_results.clicked.connect(self.back_button1)
         self.love_button.clicked.connect(self.add_to_loves)
+        self.login_button.clicked.connect(self.login_func)
+        self.logout.triggered.connect(self.logout_func)
 
         #loading image
         self.image_label.setStyleSheet("background-image : url(good.png);border : 2px solid blue")
@@ -216,6 +228,22 @@ class good_screen(QMainWindow):
             except:
                 self.price_table.setItem(rowPosition , 1, QTableWidgetItem(i[1][0][1]))
 
+    def login_func(self):
+        login_window = login_screen()
+        widget.addWidget(login_window)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def logout_func(self):
+        global account
+        if account != 'Guest':
+            account = 'Guest'
+            self.account_menu.setTitle(account)
+            self.logged_out = QtWidgets.QErrorMessage()
+            self.logged_out.showMessage('از حساب خود با موفقیت خارج شدید')
+        else:
+            self.notlogged = QtWidgets.QErrorMessage()
+            self.notlogged.showMessage('داخل حسابی نیستید که بخواهید از آن خارج شوید!')
+            
     def getClickedCell(self,row,col):
         row = row - 1
         if row != 0:

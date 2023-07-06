@@ -21,7 +21,7 @@ def scan(searched):
     driver.get('https://www.digikala.com/search/?q='+ searched)
         
     #the section that goods are in there
-    section = WebDriverWait(driver, 5).until(
+    section = WebDriverWait(driver, 4).until(
             EC.presence_of_element_located((By.TAG_NAME,'section')))
     time.sleep(2)
 
@@ -33,13 +33,10 @@ def scan(searched):
     
     driver.execute_script("arguments[0].scrollIntoView();", goods[-1])
     time.sleep(8)
-    try:
-        shutil.rmtree('/temp', ignore_errors=True)
-    except:
-        os.mkdir('temp')
+    if not os.path.exists('./temp'):
+        os.makedirs('temp')
     goods_dict = {}
     
-    i = 0
     for i,good in enumerate(goods):
 
         try:

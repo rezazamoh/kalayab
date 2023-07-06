@@ -64,6 +64,7 @@ def add_to_loved(user_id,title,link):
         loved_list = c.execute("select loved_items from login_details \
             where user_id = ?", (user_id)).fetchone()
     except:
+        loved_list = {}
         loved_list[title] = link
         
     c.execute("INSERT INTO login_details (USER_ID, loved_items) \
