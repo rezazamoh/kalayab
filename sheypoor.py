@@ -13,8 +13,12 @@ def scan(searched):
     section = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.TAG_NAME,'main')))
     #check if goods are loaded
-    WebDriverWait(section, 3).until(
-            EC.presence_of_element_located((By.TAG_NAME,'article')))
+    try:
+        WebDriverWait(section, 3).until(
+                EC.presence_of_element_located((By.TAG_NAME,'article')))
+    except:
+        return {} #no results
+    
     #finding goods
     goods = section.find_elements(By.TAG_NAME,'article')
     goods_dict = {}
@@ -40,7 +44,4 @@ def scan(searched):
             link = 'NETWORK ERROR'
         
         goods_dict[title] = [price,link]
-    print(goods_dict)
     return goods_dict
-p=input()
-scan(p)

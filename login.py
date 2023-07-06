@@ -1,4 +1,5 @@
 import sqlite3
+
 # Sqlite database and table
 def sqllitefile():
     global conn
@@ -55,4 +56,30 @@ def login(user_id,password):
         if password_id_exists:
             return '0'
         else:
-            return 'Password is not correct!'       
+            return 'Password is not correct!'    
+
+def add_to_loved(user_id,title,link):
+    sqllitefile()
+    try:
+        loved_list = c.execute("select loved_items from login_details \
+            where user_id = ?", (user_id)).fetchone()
+    except:
+        loved_list[title] = link
+        
+    c.execute("INSERT INTO login_details (USER_ID, loved_items) \
+        VALUES (?, ?)", (user_id, loved_list))
+    conn.commit()
+    c.close()
+    conn.close()
+
+def delete_from_loved(user_id,title,link):
+    sqllitefile()
+    loved_list = c.execute("select loved_items from login_details \
+        where user_id = ?", (user_id)).fetchone()
+    if loved_list:
+        del loved_list[title]
+    c.execute("INSERT INTO login_details (USER_ID, loved_items) \
+        VALUES (?, ?)", (user_id, loved_list))
+    conn.commit()
+    c.close()
+    conn.close()

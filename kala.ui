@@ -118,32 +118,25 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>280</y>
-      <width>321</width>
+      <y>290</y>
+      <width>401</width>
       <height>121</height>
      </rect>
     </property>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>true</bool>
+    </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>258</number>
+     <number>199</number>
     </attribute>
     <attribute name="verticalHeaderDefaultSectionSize">
      <number>32</number>
     </attribute>
-    <row>
+    <column>
      <property name="text">
-      <string>دیجیکالا</string>
+      <string>سایت</string>
      </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>دیوار</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>شیپور</string>
-     </property>
-    </row>
+    </column>
     <column>
      <property name="text">
       <string>قیمت</string>
@@ -167,7 +160,7 @@
     <property name="geometry">
      <rect>
       <x>350</x>
-      <y>250</y>
+      <y>240</y>
       <width>181</width>
       <height>31</height>
      </rect>

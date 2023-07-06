@@ -13,41 +13,33 @@ def scan(searched):
     section = WebDriverWait(driver, 5).until(
         EC.presence_of_element_located((By.TAG_NAME,'main')))
     # check if goods are loaded
-    WebDriverWait(section, 3).until(
-        EC.presence_of_element_located((By.TAG_NAME,'a')))
+    try:
+        WebDriverWait(section, 3).until(
+            EC.presence_of_element_located((By.TAG_NAME,'a')))
+    except:
+        return {} #no results
     # finding goods
     goods = section.find_elements(By.TAG_NAME, 'a')
     goods_dict = {}
-    for i in range(10):  # Iterate over the first 10 items
-        good = goods[i]
+    for i in goods:  # Iterate over the first 10 items
         try:
             # find title
-            title = good.find_element(By.TAG_NAME, 'h2').text
+            title = i.find_element(By.TAG_NAME, 'h2').text
         except:
             title = 'NETWORK ERROR'
 
         try:
             # find prices
-            prices = good.find_elements(By.XPATH, ".//div[@class='kt-post-card__description']")
+            prices = i.find_elements(By.XPATH, ".//div[@class='kt-post-card__description']")
             price_list = [price.text for price in prices]
         except:
             price_list = ['NETWORK ERROR']
 
         try:
             # get link
-            link = good.get_attribute('href')
+            link = i.get_attribute('href')
         except:
             link = 'NETWORK ERROR'
 
-        goods_dict[title] = {'prices': price_list, 'link': link}
-
-    for title, data in goods_dict.items():
-        print('Title:', title)
-        print('Prices:', data['prices'])
-        print('Link:', data['link'])
-        print()
-
+        goods_dict[title] = [price_list,link]
     return goods_dict
-
-p = input()
-scan(p)

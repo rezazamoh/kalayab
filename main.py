@@ -1,9 +1,11 @@
 import sys
 import resorses.res
-import digikala
+import digikala 
 import login
+import compare
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMainWindow, QApplication , QListWidgetItem ,QTableWidgetItem ,QTableWidget
 searched_phrase = ''
 result_list = []
@@ -159,13 +161,23 @@ class good_screen(QMainWindow):
     def __init__(self):
         super(good_screen,self).__init__()
         loadUi("kala.ui",self)
+        
         global selected_item ; global result_list
-        info = digikala.itemscanner(result_list[selected_item][1])
+        self.cat = digikala.itemscanner(result_list[selected_item][1])
+        info = self.cat[1]
+        self.cat_label.setText(f'در دسته بندی : {self.cat[0].text}')
+        self.cat_label.setStyleSheet("border : 1px solid cyan")
+        self.cat_label.mousePressEvent = self.search_the_cat
+        price = compare.single_search(selected_item)
         self.name_label.setText(selected_item)
         self.back_to_results.clicked.connect(self.back_button1)
+        self.love_button.clicked.connect(self.add_to_loves)
+
         #loading image
         self.image_label.setStyleSheet("background-image : url(good.png);border : 2px solid blue")
-        
+        self.image_label.setScaledContents(True)
+        self.image_label.setPixmap(QPixmap("good.png"))
+
         #loadind info table 
         for i in info:
             rowPosition = self.details_table.rowCount()
@@ -173,7 +185,45 @@ class good_screen(QMainWindow):
                 self.details_table.insertRow(rowPosition)
             self.details_table.setItem(rowPosition , 0, QTableWidgetItem(i.text))
             self.details_table.setItem(rowPosition , 1, QTableWidgetItem(info[i].text))
-            
+
+        #loadind price table 
+        rowPosition = self.price_table.rowCount()
+        self.price_table.insertRow(rowPosition)
+        self.price_table.setItem(rowPosition , 0, QTableWidgetItem('دیجیکالا'))
+        self.price_table.setItem(rowPosition , 1, QTableWidgetItem(result_list[selected_item][0]))
+
+        print(price)
+        for i in price:
+            rowPosition = self.price_table.rowCount()
+            self.price_table.insertRow(rowPosition)
+            self.price_table.setItem(rowPosition , 0, QTableWidgetItem(i[0]))
+            self.price_table.setItem(rowPosition , 1, QTableWidgetItem(i[1][0]))
+
+    def search_the_cat(self,event):
+        global result_list
+        result_list = digikala.scan(self.cat[0].text)
+        result_window = result_screen()
+        widget.addWidget(result_window)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+        widget.removeWidget(self)
+
+    def add_to_loves(self):
+        global account;global result_list
+        if account != "Guest":
+            if self.love_button.text != 'حذف از علاقه مندیها':
+                login.add_to_loved(account,selected_item,result_list[selected_item])
+                self.added_to_loved = QtWidgets.QErrorMessage()
+                self.added_to_loved.showMessage('با موفقیت به علاقه مندیها اضافه شد!')
+                self.love_button.setText('حذف از علاقه مندیها')
+            else:
+                login.delete_from_loved(account,selected_item,result_list[selected_item])
+                self.added_to_loved0 = QtWidgets.QErrorMessage()
+                self.added_to_loved0.showMessage('از علاقه مندیها پاک شد!')
+                self.love_button.setText('افرودن به علاقه مندی ها')
+        else:
+            self.notlogged2 = QtWidgets.QErrorMessage()
+            self.notlogged2.showMessage('ابتدا وارد حساب خود شوید!')
+
     def back_button1(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
         widget.removeWidget(self)         

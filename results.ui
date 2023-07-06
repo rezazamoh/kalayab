@@ -157,7 +157,7 @@
      </font>
     </property>
     <property name="text">
-     <string>منوی اصلی</string>
+     <string>بازگشت</string>
     </property>
    </widget>
    <widget class="QPushButton" name="select_button">
