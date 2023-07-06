@@ -23,24 +23,6 @@
    <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="search_button">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>110</y>
-      <width>80</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>13</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>جستجو</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="logo_label">
     <property name="geometry">
      <rect>
@@ -61,21 +43,6 @@
     </property>
     <property name="scaledContents">
      <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="search_input">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>90</y>
-      <width>521</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>13</pointsize>
-     </font>
     </property>
    </widget>
    <widget class="QScrollArea" name="scrollArea">
@@ -112,7 +79,7 @@
        <enum>Qt::Vertical</enum>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QListWidget" name="loved_list">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -127,9 +94,9 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>660</x>
       <y>120</y>
-      <width>71</width>
+      <width>151</width>
       <height>31</height>
      </rect>
     </property>
@@ -139,14 +106,14 @@
      </font>
     </property>
     <property name="text">
-     <string>نتایج:</string>
+     <string>علاقه مندی ها:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="back_button">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>210</y>
+      <x>70</x>
+      <y>310</y>
       <width>91</width>
       <height>51</height>
      </rect>
@@ -163,8 +130,8 @@
    <widget class="QPushButton" name="select_button">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>210</y>
+      <x>70</x>
+      <y>250</y>
       <width>91</width>
       <height>51</height>
      </rect>
@@ -176,37 +143,6 @@
     </property>
     <property name="text">
      <string>انتخاب</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pre_visible">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>280</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>مشاهده پیشنمایش</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="img_label">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>330</y>
-      <width>241</width>
-      <height>251</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
     </property>
    </widget>
   </widget>

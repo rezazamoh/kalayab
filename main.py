@@ -122,7 +122,15 @@ class login_screen(QMainWindow):
             main_window.account_menu.setTitle(account)
         else:
             self.error_label.setText(respond)
-            
+
+class loved_screen(QMainWindow):
+    def __init__(self):
+        super(login_screen,self).__init__()
+        loadUi("login.ui",self)
+        self.register_rb.setChecked(True)
+        self.done_button.clicked.connect(self.log_reg)
+        self.back_button.clicked.connect(self.back_to_main)
+
 class result_screen(QMainWindow):
     def __init__(self):
         super(result_screen,self).__init__()
@@ -134,11 +142,17 @@ class result_screen(QMainWindow):
         self.search_button.clicked.connect(self.search_func)
         self.back_button.clicked.connect(self.back_func)
         self.select_button.clicked.connect(self.goto_goodpage)
+        self.pre_visible.clicked.connect(self.show_pre)
+
+    def show_pre(self):
+        self.img_label.setStyleSheet(f"background-image : url(temp/{self.listWidget.currentRow()}.png);border : 2px solid blue")
+        self.img_label.setScaledContents(True)
+        self.img_label.setPixmap(QPixmap(f"temp/{self.listWidget.currentRow()}.png"))
 
     def goto_goodpage(self):
         global selected_item ; global result_list
         selected = self.listWidget.currentRow()
-        if selected != -1:
+        if selected != -1 and list(result_list.keys())[selected] != '':
             selected_item = (list(result_list.keys())[selected])
             good_window = good_screen()
             widget.addWidget(good_window)
@@ -168,7 +182,7 @@ class good_screen(QMainWindow):
         self.cat_label.setText(f'در دسته بندی : {self.cat[0].text}')
         self.cat_label.setStyleSheet("border : 1px solid cyan")
         self.cat_label.mousePressEvent = self.search_the_cat
-        price = compare.single_search(selected_item)
+        self.price = compare.single_search(selected_item)
         self.name_label.setText(selected_item)
         self.back_to_results.clicked.connect(self.back_button1)
         self.love_button.clicked.connect(self.add_to_loves)
@@ -191,13 +205,21 @@ class good_screen(QMainWindow):
         self.price_table.insertRow(rowPosition)
         self.price_table.setItem(rowPosition , 0, QTableWidgetItem('دیجیکالا'))
         self.price_table.setItem(rowPosition , 1, QTableWidgetItem(result_list[selected_item][0]))
+        self.price_table.cellClicked.connect(self.getClickedCell)
 
-        print(price)
-        for i in price:
+        for i in self.price:
             rowPosition = self.price_table.rowCount()
             self.price_table.insertRow(rowPosition)
             self.price_table.setItem(rowPosition , 0, QTableWidgetItem(i[0]))
-            self.price_table.setItem(rowPosition , 1, QTableWidgetItem(i[1][0]))
+            try:
+                self.price_table.setItem(rowPosition , 1, QTableWidgetItem(i[1][0]))
+            except:
+                self.price_table.setItem(rowPosition , 1, QTableWidgetItem(i[1][0][1]))
+
+    def getClickedCell(self,row,col):
+        row = row - 1
+        if row != 0:
+            digikala.open(self.price[row][1][1])
 
     def search_the_cat(self,event):
         global result_list

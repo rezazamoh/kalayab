@@ -3,6 +3,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import os ,shutil
+
+def open(url):
+    #starting driver
+    options = webdriver.ChromeOptions()
+    options.add_argument("--start-maximized")
+    options.add_experimental_option('detach',True)
+    driver = webdriver.Chrome("chromedriver.exe",options=options)
+    driver.get(url)
 
 def scan(searched):   
     #starting driver
@@ -21,22 +30,30 @@ def scan(searched):
         goods = section.find_elements(By.TAG_NAME,'a')
     except:
         return {} #no results
+    
+    driver.execute_script("arguments[0].scrollIntoView();", goods[-1])
+    time.sleep(8)
     try:
-        div = section.find_element(By.XPATH,'./div[@class="grow-1 color-700 text-subtitle-strong"]')
-        if div.text == 'منظور شما این بود؟':
-            goods = goods[1:]
+        shutil.rmtree('/temp', ignore_errors=True)
     except:
-        pass
-
+        os.mkdir('temp')
     goods_dict = {}
-    for good in goods:
+    
+    i = 0
+    for i,good in enumerate(goods):
 
         try:
             #find title
             title = good.find_element(By.TAG_NAME,'h3').text
         except:
-            title = 'NETWORK ERROR'
-        
+            title = ''
+        try:
+            #get_image
+            img = good.find_element(By.XPATH,'./img[@class="w-100 radius-medium d-inline-block ls-is-cached lazyloaded"]')
+            img.screenshot(f'temp/{i}.png')
+        except:
+            good.screenshot(f'temp/{i}.png')
+                    
         try:
             #find price
             price = good.find_element(By.XPATH,".//div[@class='d-flex ai-center jc-end gap-1 color-700 color-400 text-h5 grow-1']").text
@@ -101,4 +118,3 @@ def itemscanner(link):
         values = block.find_element(By.TAG_NAME,'div')
         info[title]=values
     return (cat,info)
-    
