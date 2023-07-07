@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import os ,shutil
+import os
 
 def open(url):
     #starting driver
@@ -19,20 +19,15 @@ def scan(searched):
     options.add_argument("--start-maximized")
     driver = webdriver.Chrome("chromedriver.exe",options=options)
     driver.get('https://www.digikala.com/search/?q='+ searched)
-        
-    #the section that goods are in there
-    section = WebDriverWait(driver, 4).until(
-            EC.presence_of_element_located((By.TAG_NAME,'section')))
-    time.sleep(2)
 
+    time.sleep(4) 
     #finding goods
-    try:
-        goods = section.find_elements(By.TAG_NAME,'a')
-    except:
+    goods = driver.find_elements(By.XPATH,'//a[@class="d-block pointer pos-relative bg-000 overflow-hidden grow-1 py-3 px-4 px-2-lg h-full-md styles_VerticalProductCard--hover__ud7aD"]')
+    if len(goods) == 0:
         return {} #no results
-    
-    driver.execute_script("arguments[0].scrollIntoView();", goods[-1])
-    time.sleep(8)
+
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(5)
     if not os.path.exists('./temp'):
         os.makedirs('temp')
     goods_dict = {}
@@ -50,7 +45,7 @@ def scan(searched):
             img.screenshot(f'temp/{i}.png')
         except:
             good.screenshot(f'temp/{i}.png')
-                    
+        time.sleep(0.2)
         try:
             #find price
             price = good.find_element(By.XPATH,".//div[@class='d-flex ai-center jc-end gap-1 color-700 color-400 text-h5 grow-1']").text

@@ -218,7 +218,7 @@ class good_screen(QMainWindow):
         self.price_table.setItem(rowPosition , 0, QTableWidgetItem('دیجیکالا'))
         self.price_table.setItem(rowPosition , 1, QTableWidgetItem(result_list[selected_item][0]))
         self.price_table.cellClicked.connect(self.getClickedCell)
-
+        
         for i in self.price:
             rowPosition = self.price_table.rowCount()
             self.price_table.insertRow(rowPosition)
@@ -245,9 +245,10 @@ class good_screen(QMainWindow):
             self.notlogged.showMessage('داخل حسابی نیستید که بخواهید از آن خارج شوید!')
             
     def getClickedCell(self,row,col):
-        row = row - 1
         if row != 0:
-            digikala.open(self.price[row][1][1])
+            digikala.open(self.price[row-1][1][1])
+        else:
+            digikala.open(result_list[selected_item][1])
 
     def search_the_cat(self,event):
         global result_list
